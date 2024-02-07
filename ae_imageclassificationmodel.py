@@ -36,7 +36,7 @@ def build_classification_model(input_shape, num_classes):
     return classification_model
 
 # Define input shape and number of classes
-input_shape = (64, 64, 3)  # Adjusted according to your image dimensions
+input_shape = (240, 320, 3)  # Adjusted according to your image dimensions
 num_classes = 2  # Binary classification
 
 # Build autoencoder model
@@ -49,6 +49,10 @@ classification_model = build_classification_model(input_shape, num_classes)
 combined_input = autoencoder.input
 classification_input = autoencoder.output
 classification_output = classification_model(classification_input)
+
+# Print shapes before concatenation
+print("Shape of classification layer output:", classification_model.layers[-2].output.shape)
+print("Shape of classification output:", classification_output.shape)
 
 # Concatenate dense layers' output
 classification_layer = classification_model.layers[-2].output
