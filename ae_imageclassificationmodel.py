@@ -28,13 +28,13 @@ def build_classification_model(input_shape, num_classes):
     input_img = Input(shape=input_shape, name='input_image')
     x = Conv2D(32, (3, 3), activation='relu', padding='same')(input_img)
     x = MaxPooling2D((2, 2), padding='same')(x)
-    x = Flatten()(x)
+    x = Flatten()(x)  # Flatten the output before dense layers
     x = Dense(128, activation='relu')(x)
     output_classification = Dense(num_classes, activation='softmax', name='classification_output')(x)
 
     classification_model = Model(input_img, output_classification, name='classification_model')
     return classification_model
-
+    
 # Define input shape and number of classes
 input_shape = (240, 320, 3)  # Adjusted according to your image dimensions
 num_classes = 2  # Binary classification
